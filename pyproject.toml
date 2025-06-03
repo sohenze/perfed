@@ -1,15 +1,19 @@
 [project]
 name = "perfed"
+version = "0.1.0"
 authors = [
   {name = "Enze Soh", email = "enzesoh@gmail.com"},
 ]
-version = "0.1.0"
 description = "Simplified performance timers in Python."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "tabulate>=0.9.0",
 ]
+license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/sohenze/perfed"
 
 [dependency-groups]
 dev = [
@@ -18,3 +22,7 @@ dev = [
     "pytest>=8.4.0",
     "types-tabulate>=0.9.0.20241207",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
