@@ -22,3 +22,6 @@ with timers.start("third"):
 
 timers.show()
 ```
+
+## Credit
+This is heavily inspired by [perfcounters](https://github.com/ebursztein/perfcounters). I decided to create this repository as I have some original ideas and would like to try my hand at making my own Python package. 
