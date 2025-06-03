@@ -7,8 +7,8 @@ from tabulate import tabulate
 from perfed.timer import Timer
 
 
-class Timers:
-    """A collection of timers.
+class TimerManager:
+    """Manages a collection of timers.
     """
     def __init__(self) -> None:
         self._timers: Dict[str, Timer] = {}
