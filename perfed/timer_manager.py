@@ -1,6 +1,6 @@
 import csv
 import sys
-from typing import Dict, Literal
+from typing import Any, Dict, List, Literal
 
 from tabulate import tabulate
 
@@ -99,9 +99,8 @@ class TimerManager:
             Unit of time to be used. Defaults to "sec".
         """
         headers = ["Timer", "Elasped Time"]
-        data = [[name, timer.get(unit=unit)] for name, timer in self._timers.items()]
-        data.insert(0, headers)
+        data: List[List[Any]] = [[name, timer.get(unit=unit)] for name, timer in self._timers.items()]
         
         writer = csv.writer(sys.stdout)
-        for row in data:
-            writer.writerow(row)
+        writer.writerow(headers)
+        writer.writerows(data)
