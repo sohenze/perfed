@@ -1,11 +1,11 @@
 from typing import Literal
 
 
-def convert_from_ns(time_ns: int, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> float:
+def convert_from_ns(time_ns: float, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> float:
     """Convert nanoseconds to specified time unit.
 
     Args:
-        time (int): Time in nanoseconds.
+        time (float): Time in nanoseconds.
         unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
         Time unit to convert to. Defaults to "sec".
 
