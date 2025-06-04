@@ -1,8 +1,31 @@
 # Perfed
 
-Perfed is a simplified approach to performance timing in Python.
+**Perfed** is a lightweight and easy-to-use package for measuring and analyzing execution times in Python code. It is a wrapper around `time.perf_counter_ns()` to provide precise performance timing that provides an intuitive interface and convenient tools for displaying and analyzing the results.
+
+
+
+## Features
+
+✅ Measure execution time of code blocks and functions  
+✅ Display results as tables in the console  
+✅ Output timings as a pandas DataFrame for further analysis  
+✅ Compute aggregated statistics (average, min, max) for decorated functions
+
+## Requirements
+
+- Python 3.12 or higher
+
+## Installation
+
+```
+pip install perfed
+```
 
 ## Usage
+
+### Using **TimerManager**
+Measure and manage multiple timers concurrently.
+
 ```Python
 import time
 
@@ -46,6 +69,9 @@ third          0.400186
 
 """
 ```
+
+### Using **TimerDecorator**
+Automatically measure execution time of decorated functions and view aggregate statistics.
 
 ```Python
 import time
@@ -116,5 +142,5 @@ Min      0.30011
 """
 ```
 
-## Credit
-Perfed is inspired by [perfcounters](https://github.com/ebursztein/perfcounters). I decided to create this project as I have some original ideas and would like to try my hand at publishing my own Python package. 
+## Why Perfed?
+Perfed is inspired by [perfcounters](https://github.com/ebursztein/perfcounters). I created this project to add some original ideas and to share a simple, flexible performance timing tool with the community.
