@@ -46,7 +46,7 @@ class Timer:
         """
         if self._start < 0:
             raise RuntimeError("Timer has not been started.")
-        
+
         curr_stop = self._stop if self._stop > 0 else time.perf_counter_ns()
         timer_value = curr_stop - self._start
 

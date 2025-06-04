@@ -16,7 +16,7 @@ class TimerManager:
 
     def __len__(self) -> int:
         return len(self._timers)
-    
+
     def _create_timer(self, name: str) -> Timer:
         """Create a timer.
 
@@ -35,7 +35,7 @@ class TimerManager:
         timer = Timer(name=name)
         self._timers[name] = timer
         return timer
-    
+
     def start(self, name: str) -> Timer:
         """Create and start a timer.
 
@@ -54,7 +54,7 @@ class TimerManager:
 
         Args:
             name (str): Name of timer.
-        
+
         Raises:
             ValueError: Timer with name does not exist.
         """
@@ -62,7 +62,6 @@ class TimerManager:
             raise ValueError(f"Timer with the name {name} does not exist.")
 
         timer.stop()
-
 
     def show(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> None:
         """Print timers to stdout.
@@ -103,8 +102,7 @@ class TimerManager:
         Returns:
             pd.Dataframe: A dataframe of the timers.
         """
-        df = pd.DataFrame({
+        return pd.DataFrame({
             "Timer": self._timers.keys(),
             "Elasped Time": [timer.get(unit=unit) for timer in self._timers.values()],
         })
-        return df

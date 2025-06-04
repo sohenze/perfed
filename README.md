@@ -5,6 +5,7 @@ Perfed is a simplified approach to performance timing in Python.
 ## Usage
 ```Python
 import time
+
 from perfed.timer_manager import TimerManager
 
 tm = TimerManager()
@@ -46,17 +47,21 @@ third          0.400186
 
 ```Python
 import time
+
 from perfed.timer_decorator import TimerDecorator
+
 
 @TimerDecorator.decorate("foo_tm")
 def foo(x: int):
     print(x)
     time.sleep(0.2)
 
+
 @TimerDecorator.decorate("bar_tm")
 def bar(x: str):
     print(x)
     time.sleep(0.3)
+
 
 foo(49)
 foo(200)

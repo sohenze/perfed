@@ -25,7 +25,7 @@ class TimerDecorator:
                 return res
             return inner
         return wrapper
-    
+
     @classmethod
     def get_manager(cls, name: str) -> TimerManager:
         if (manager := cls._decorated_managers.get(name)) is None:

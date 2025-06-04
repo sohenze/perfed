@@ -23,4 +23,4 @@ def convert_from_ns(time_ns: float, unit: Literal["ns", "ms", "sec", "min"] = "s
         case "min":
             return time_ns / (10 ** 9) / 60
         case _:
-            raise ValueError("Invalid format: Format must be one of [\"ns\", \"ms\", \"sec\" or \"min\"].")
+            raise ValueError('Invalid format: Format must be one of ["ns", "ms", "sec" or "min"].')
