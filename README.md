@@ -1,6 +1,7 @@
 # Perfed
 
-**Perfed** is a lightweight and easy-to-use package for measuring and analyzing execution times in Python code. It is a wrapper around `time.perf_counter_ns()` to provide precise performance timing that provides an intuitive interface and convenient tools for displaying and analyzing the results.
+**Perfed** is a lightweight and easy-to-use package for measuring and analyzing execution times in Python code. It is a wrapper around `time.perf_counter_ns()` to provide precise performance timing with an intuitive interface and convenient tools for displaying and analyzing results.
+
 
 
 
