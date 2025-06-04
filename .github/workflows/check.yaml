@@ -28,5 +28,5 @@ jobs:
       - name: Lint
         run: uv run lint
 
-      - name: Lint
+      - name: Check
         run: uv run check
