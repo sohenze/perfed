@@ -50,25 +50,39 @@ with tm.start("third"):
 print("~~~~~~~~~~TIMERS~~~~~~~~~~")
 tm.show(unit="sec")
 
+print("~~~~~~~~~~TUPLES~~~~~~~~~~")
+print(tm.to_tuples("min"))
+
+print("~~~~~~~~~~DICTIONARY~~~~~~~~~~")
+print(tm.to_dict("ms"))
+
 print("~~~~~~~~~~DATAFRAME~~~~~~~~~~")
 ipy_display(tm.to_dataframe("ns"))
 
-"""
+tm.save("timers.csv", "csv")
+```
+
 Output:
-
+```
 ~~~~~~~~~~TIMERS~~~~~~~~~~
-Timer      Elasped Time
--------  --------------
-first          0.2008
-second         0.300584
-third          0.400186
+Timer      Duration
+-------  ----------
+first      0.200762
+second     0.300758
+third      0.40125
+~~~~~~~~~~TUPLES~~~~~~~~~~
+[('first', 0.003346028333333333), ('second', 0.005012636666666666), ('third', 0.0066875016666666665)]
+~~~~~~~~~~DICTIONARY~~~~~~~~~~
+{'first': 200761.7, 'second': 300758.2, 'third': 401250.1}
 ~~~~~~~~~~DATAFRAME~~~~~~~~~~
-    Timer	Elasped Time
-0	first	200800500.0
-1	second	300583900.0
-2	third	400186100.0
-
-"""
+    Timer	Duration
+0	first	200761700.0
+1	second	300758200.0
+2	third	401250100.0
+~~~~~~~~~~timers.csv~~~~~~~~~~
+first,0.2007617
+second,0.3007582
+third,0.4012501
 ```
 
 ### Using **TimerDecorator**
@@ -108,10 +122,10 @@ print("~~~~~~~~~~BAR TIMERS~~~~~~~~~~")
 TimerDecorator.get_manager("bar_tm").show()
 print("~~~~~~~~~~BAR STATS~~~~~~~~~~")
 TimerDecorator.get_manager("bar_tm").show_stats()
+```
 
-"""
 Output:
-
+```
 49
 200
 455
@@ -140,7 +154,6 @@ Stat       Value
 Average  0.30041
 Max      0.30071
 Min      0.30011
-"""
 ```
 
 ## Why Perfed?
