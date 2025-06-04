@@ -5,36 +5,38 @@ Perfed is a simplified approach to performance timing in Python.
 ## Usage
 ```Python
 import time
-from perfed.timers import Timers
+from perfed.timer_manager import TimerManager
 
-timers = Timers()
+tm = TimerManager()
 
-timers.start("first")
+tm.start("first")
 time.sleep(0.2)
-timers.stop("first")
+tm.stop("first")
 
-timers.start("second")
+tm.start("second")
 time.sleep(0.3)
-timers.stop("second")
+tm.stop("second")
 
-with timers.start("third"):
+with tm.start("third"):
     time.sleep(0.4)
 
-timers.show()
+tm.show(unit="sec")
+print("------CSV-----")
+tm.to_csv(unit="sec")
 
 """
 Output:
 
 Timer      Elasped Time
 -------  --------------
-first          0.200766
-second         0.301181
-third          0.400664
+first          0.200358
+second         0.300527
+third          0.4004
 ------CSV-----
 Timer,Elasped Time
-first,0.200766
-second,0.301181
-third,0.4006642
+first,0.2003583
+second,0.300527
+third,0.4004005
 """
 ```
 
@@ -74,17 +76,17 @@ cat
 dog
 Timer           Elasped Time
 ------------  --------------
-foo_timer(1)        0.200183
-foo_timer(2)        0.200126
-foo_timer(3)        0.200508
-0.20027236666666665
+foo_timer(1)        0.200797
+foo_timer(2)        0.200652
+foo_timer(3)        0.201026
+0.2008254
 Timer           Elasped Time
 ------------  --------------
-bar_timer(1)        0.300116
-bar_timer(2)        0.300573
-0.3003445
+bar_timer(1)        0.300231
+bar_timer(2)        0.300369
+0.3003001
 """
 ```
 
 ## Credit
-This is heavily inspired by [perfcounters](https://github.com/ebursztein/perfcounters). I decided to create this repository as I have some original ideas and would like to try my hand at making my own Python package. 
+Perfed is inspired by [perfcounters](https://github.com/ebursztein/perfcounters). I decided to create this project as I have some original ideas and would like to try my hand at publishing my own Python package. 
