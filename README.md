@@ -23,15 +23,24 @@ with tm.start("third"):
 print("~~~~~~~~~~TIMERS~~~~~~~~~~")
 tm.show(unit="sec")
 
+print("~~~~~~~~~~DATAFRAME~~~~~~~~~~")
+display(tm.to_dataframe("ns"))
+
 """
 Output:
 
 ~~~~~~~~~~TIMERS~~~~~~~~~~
 Timer      Elasped Time
 -------  --------------
-first          0.200473
-second         0.300519
-third          0.400214
+first          0.2008
+second         0.300584
+third          0.400186
+~~~~~~~~~~DATAFRAME~~~~~~~~~~
+    Timer	Elasped Time
+0	first	200800500.0
+1	second	300583900.0
+2	third	400186100.0
+
 """
 ```
 

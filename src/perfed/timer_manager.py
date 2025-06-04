@@ -1,7 +1,6 @@
-import csv
-import sys
-from typing import Any, Dict, List, Literal
+from typing import Dict, Literal
 
+import pandas as pd
 from tabulate import tabulate
 
 from perfed.timer import Timer
@@ -94,16 +93,18 @@ class TimerManager:
         tabulated = tabulate(data, headers=headers)
         print(tabulated)
 
-    def to_csv(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> None:
-        """Print timers to stdout in csv format.
+    def to_dataframe(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> pd.DataFrame:
+        """Return timers in dataframe format.
 
         Args:
             unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
             Unit of time to be used. Defaults to "sec".
+
+        Returns:
+            pd.Dataframe: A dataframe of the timers.
         """
-        headers = ["Timer", "Elasped Time"]
-        data: List[List[Any]] = [[name, timer.get(unit=unit)] for name, timer in self._timers.items()]
-        
-        writer = csv.writer(sys.stdout)
-        writer.writerow(headers)
-        writer.writerows(data)
+        df = pd.DataFrame({
+            "Timer": self._timers.keys(),
+            "Elasped Time": [timer.get(unit=unit) for timer in self._timers.values()],
+        })
+        return df
