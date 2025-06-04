@@ -64,20 +64,6 @@ class TimerManager:
 
         timer.stop()
 
-    
-    def average(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> float:
-        """Returns the average elapsed time of timers.
-
-        Args:
-            unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
-            Unit of time to be used. Defaults to "sec".
-        
-        Returns:
-            float: Average elasped time.
-        """
-        ave = sum([timer.get("ns") for timer in self._timers.values()]) / len(self)
-        return convert_from_ns(ave, unit=unit)
-
 
     def show(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> None:
         """Print timers to stdout.
@@ -88,6 +74,23 @@ class TimerManager:
         """
         headers = ["Timer", "Elasped Time"]
         data = [[name, timer.get(unit=unit)] for name, timer in self._timers.items()]
+        tabulated = tabulate(data, headers=headers)
+        print(tabulated)
+
+    def show_stats(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> None:
+        """Print stats of timers to stdout.
+
+        Args:
+            unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
+            Unit of time to be used. Defaults to "sec".
+        """
+        timer_values = [timer.get("ns") for timer in self._timers.values()]
+        ave = convert_from_ns(sum(timer_values) / len(self), unit=unit)
+        _max = convert_from_ns(max(timer_values), unit=unit)
+        _min = convert_from_ns(min(timer_values), unit=unit)
+
+        headers = ["Stat", "Value"]
+        data = [["Average", ave], ["Max", _max], ["Min", _min]]
         tabulated = tabulate(data, headers=headers)
         print(tabulated)
 

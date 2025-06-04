@@ -20,23 +20,18 @@ tm.stop("second")
 with tm.start("third"):
     time.sleep(0.4)
 
+print("~~~~~~~~~~TIMERS~~~~~~~~~~")
 tm.show(unit="sec")
-print("------CSV-----")
-tm.to_csv(unit="sec")
 
 """
 Output:
 
+~~~~~~~~~~TIMERS~~~~~~~~~~
 Timer      Elasped Time
 -------  --------------
-first          0.200358
-second         0.300527
-third          0.4004
-------CSV-----
-Timer,Elasped Time
-first,0.2003583
-second,0.300527
-third,0.4004005
+first          0.200473
+second         0.300519
+third          0.400214
 """
 ```
 
@@ -44,12 +39,12 @@ third,0.4004005
 import time
 from perfed.timer_decorator import TimerDecorator
 
-@TimerDecorator.decorate("foo_timer")
+@TimerDecorator.decorate("foo_tm")
 def foo(x: int):
     print(x)
     time.sleep(0.2)
 
-@TimerDecorator.decorate("bar_timer")
+@TimerDecorator.decorate("bar_tm")
 def bar(x: str):
     print(x)
     time.sleep(0.3)
@@ -61,10 +56,15 @@ foo(455)
 bar("cat")
 bar("dog")
 
-TimerDecorator.get_manager("foo_timer").show()
-print(TimerDecorator.get_manager("foo_timer").average())
-TimerDecorator.get_manager("bar_timer").show()
-print(TimerDecorator.get_manager("bar_timer").average())
+print("~~~~~~~~~~FOO TIMERS~~~~~~~~~~")
+TimerDecorator.get_manager("foo_tm").show()
+print("~~~~~~~~~~FOO STATS~~~~~~~~~~")
+TimerDecorator.get_manager("foo_tm").show_stats()
+
+print("~~~~~~~~~~BAR TIMERS~~~~~~~~~~")
+TimerDecorator.get_manager("bar_tm").show()
+print("~~~~~~~~~~BAR STATS~~~~~~~~~~")
+TimerDecorator.get_manager("bar_tm").show_stats()
 
 """
 Output:
@@ -74,17 +74,29 @@ Output:
 455
 cat
 dog
-Timer           Elasped Time
-------------  --------------
-foo_timer(1)        0.200797
-foo_timer(2)        0.200652
-foo_timer(3)        0.201026
-0.2008254
-Timer           Elasped Time
-------------  --------------
-bar_timer(1)        0.300231
-bar_timer(2)        0.300369
-0.3003001
+~~~~~~~~~~FOO TIMERS~~~~~~~~~~
+Timer        Elasped Time
+---------  --------------
+foo_tm(1)        0.200905
+foo_tm(2)        0.200426
+foo_tm(3)        0.200805
+~~~~~~~~~~FOO STATS~~~~~~~~~~
+Stat        Value
+-------  --------
+Average  0.200712
+Max      0.200905
+Min      0.200426
+~~~~~~~~~~BAR TIMERS~~~~~~~~~~
+Timer        Elasped Time
+---------  --------------
+bar_tm(1)         0.30011
+bar_tm(2)         0.30071
+~~~~~~~~~~BAR STATS~~~~~~~~~~
+Stat       Value
+-------  -------
+Average  0.30041
+Max      0.30071
+Min      0.30011
 """
 ```
 
