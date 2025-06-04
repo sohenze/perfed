@@ -1,4 +1,5 @@
-from typing import Dict, Literal
+import logging
+from typing import Callable, Dict, Literal
 
 import pandas as pd
 from tabulate import tabulate
@@ -63,46 +64,60 @@ class TimerManager:
 
         timer.stop()
 
-    def show(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> None:
-        """Print timers to stdout.
+    def show(self, unit: Literal["ns", "ms", "sec", "min"] = "sec", print_fn: Callable = print) -> None:
+        """
+        Output the timers with their respective durations. Prints to stdout by default.
 
         Args:
-            unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
-            Unit of time to be used. Defaults to "sec".
+            unit (Literal["ns", "ms", "sec", "min"], optional):
+                The unit of time to display the durations.
+                Accepts "ns" for nanoseconds, "ms" for milliseconds, "sec" for seconds,
+                and "min" for minutes. Defaults to "sec".
+            print_fn (Callable, optional):
+                A callable function used to output the timers (e.g., `print`, `logger.debug`).
+                Defaults to the built-in `print` function.
         """
-        headers = ["Timer", "Elasped Time"]
+        headers = ["Timer", "Duration"]
         data = [[name, timer.get(unit=unit)] for name, timer in self._timers.items()]
         tabulated = tabulate(data, headers=headers)
-        print(tabulated)
+        print_fn(tabulated)
 
-    def show_stats(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> None:
-        """Print stats of timers to stdout.
+    def show_stats(self, unit: Literal["ns", "ms", "sec", "min"] = "sec", print_fn: Callable = print) -> None:
+        """
+        Output the aggregate stats of the timers. Prints to stdout by default.
 
         Args:
-            unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
-            Unit of time to be used. Defaults to "sec".
+            unit (Literal["ns", "ms", "sec", "min"], optional):
+                The unit of time to display the durations.
+                Accepts "ns" for nanoseconds, "ms" for milliseconds, "sec" for seconds,
+                and "min" for minutes. Defaults to "sec".
+            print_fn (Callable, optional):
+                A callable function used to output the stats (e.g., `print`, `logger.debug`).
+                Defaults to the built-in `print` function.
         """
         timer_values = [timer.get("ns") for timer in self._timers.values()]
         ave = convert_from_ns(sum(timer_values) / len(self), unit=unit)
         _max = convert_from_ns(max(timer_values), unit=unit)
         _min = convert_from_ns(min(timer_values), unit=unit)
 
-        headers = ["Stat", "Value"]
+        headers = ["Stat", "Duration"]
         data = [["Average", ave], ["Max", _max], ["Min", _min]]
         tabulated = tabulate(data, headers=headers)
-        print(tabulated)
+        print_fn(tabulated)
 
     def to_dataframe(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> pd.DataFrame:
         """Return timers in dataframe format.
 
         Args:
-            unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
-            Unit of time to be used. Defaults to "sec".
+            unit (Literal["ns", "ms", "sec", "min"], optional):
+                The unit of time to display the durations.
+                Accepts "ns" for nanoseconds, "ms" for milliseconds, "sec" for seconds,
+                and "min" for minutes. Defaults to "sec".
 
         Returns:
             pd.Dataframe: A dataframe of the timers.
         """
         return pd.DataFrame({
             "Timer": self._timers.keys(),
-            "Elasped Time": [timer.get(unit=unit) for timer in self._timers.values()],
+            "Duration": [timer.get(unit=unit) for timer in self._timers.values()],
         })

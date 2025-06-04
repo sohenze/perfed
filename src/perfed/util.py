@@ -7,7 +7,9 @@ def convert_from_ns(time_ns: float, unit: Literal["ns", "ms", "sec", "min"] = "s
     Args:
         time (float): Time in nanoseconds.
         unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
-        Time unit to convert to. Defaults to "sec".
+            The unit of time to convert to.
+            Accepts "ns" for nanoseconds, "ms" for milliseconds, "sec" for seconds,
+            and "min" for minutes. Defaults to "sec".
 
     Returns:
         float: Converted time.

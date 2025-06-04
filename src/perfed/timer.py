@@ -32,17 +32,19 @@ class Timer:
         return True
 
     def get(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> float:
-        """Get timer elapsed time.
+        """Get timer duration.
 
         Args:
-            unit (Literal[&quot;ns&quot;, &quot;ms&quot;, &quot;sec&quot;, &quot;min&quot;], optional):
-            Time unit to read. Defaults to "sec".
+            unit (Literal["ns", "ms", "sec", "min"], optional):
+                The unit of time to return the timer duration in.
+                Accepts "ns" for nanoseconds, "ms" for milliseconds, "sec" for seconds,
+                and "min" for minutes. Defaults to "sec".
 
         Raises:
             RuntimeError: Timer has not been started.
 
         Returns:
-            float: Timer elasped time.
+            float: Timer duration.
         """
         if self._start < 0:
             raise RuntimeError("Timer has not been started.")
