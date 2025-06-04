@@ -6,6 +6,8 @@ Perfed is a simplified approach to performance timing in Python.
 ```Python
 import time
 
+from IPython.display import display as ipy_display
+
 from perfed.timer_manager import TimerManager
 
 tm = TimerManager()
@@ -25,7 +27,7 @@ print("~~~~~~~~~~TIMERS~~~~~~~~~~")
 tm.show(unit="sec")
 
 print("~~~~~~~~~~DATAFRAME~~~~~~~~~~")
-display(tm.to_dataframe("ns"))
+ipy_display(tm.to_dataframe("ns"))
 
 """
 Output:
