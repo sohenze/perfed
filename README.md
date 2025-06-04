@@ -156,5 +156,25 @@ Max      0.30071
 Min      0.30011
 ```
 
+## How It Works
+This package consists of 3 main components:
+- **Timer**
+
+  Represents a single timer that can be started and stopped. It also supports context manager usage (`with Timer() as t:`) and can report the elapsed duration in various time units (nanoseconds, milliseconds, seconds, or minutes).
+
+- **TimerManager**
+
+  Manages a collection of named `Timer` instances. It lets you:
+    - Start and stop timers by name.
+    - Use timers as context managers.
+    - View all timers and their durations in different formats (tuples, dictionary, pandas DataFrame).
+    - Save the results to a CSV or JSON file.
+    - Display the timers in a tabular format in the console.
+    - Show basic statistics (average, max, min) across all timers.
+
+- **TimerDecorator**
+
+  Enables easy timing of function executions through a decorator. Decorated functions are each assigned a dedicated `TimerManager`, which starts and stops a `Timer` instance for each function call. Assigned `TimerManager` instances are tracked within a class variable in `TimerDecorater` and can be individually accessed for further analysis.
+
 ## Why Perfed?
 Perfed is inspired by [perfcounters](https://github.com/ebursztein/perfcounters). I created this project to add some original ideas and to share a simple, flexible performance timing tool with the community.
