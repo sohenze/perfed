@@ -64,6 +64,12 @@ class TimerManager:
 
         timer.stop()
 
+    def get_timer(self, name: str) -> Timer:
+        if (timer := self._timers.get(name)) is None:
+            raise ValueError(f"Timer with the name {name} does not exist.")
+
+        return timer
+
     def to_tuples(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> List[Tuple[str, float]]:
         """Return timers in list of tuples format.
 
