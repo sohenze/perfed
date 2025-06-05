@@ -21,6 +21,9 @@ class Timer:
     def stop(self) -> None:
         """Stop timer. Ignores multiple stops.
         """
+        if self._start < 0:
+            raise RuntimeError("Timer has not been started.")
+
         if self._stop < 0:
             self._stop = time.perf_counter_ns()
 
