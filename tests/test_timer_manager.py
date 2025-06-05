@@ -65,6 +65,9 @@ class TestTimerManager:
         with pytest.raises(ValueError):
             tm_with_timers.get_timer("z")
 
+    def test_get_timers(self, tm_with_timers):
+        assert tm_with_timers.get_timers() is tm_with_timers._timers
+
     def test_to_tuples(self, tm_with_timers):
         expected = [
             ("a", 0.001),

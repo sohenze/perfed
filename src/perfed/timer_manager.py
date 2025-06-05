@@ -70,6 +70,9 @@ class TimerManager:
 
         return timer
 
+    def get_timers(self) -> Dict[str, Timer]:
+        return self._timers
+
     def to_tuples(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> List[Tuple[str, float]]:
         """Return timers in list of tuples format.
 
