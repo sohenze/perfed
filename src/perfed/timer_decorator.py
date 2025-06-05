@@ -32,3 +32,7 @@ class TimerDecorator:
             raise ValueError(f"Manager with the name {name} does not exist.")
 
         return manager
+
+    @classmethod
+    def get_managers(cls) -> Dict[str, TimerManager]:
+        return cls._decorated_managers

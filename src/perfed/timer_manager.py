@@ -46,7 +46,7 @@ class TimerManager:
         Returns:
             Timer: Started timer.
         """
-        timer = self._create_timer(name)
+        timer = self._timers.get(name, self._create_timer(name))
         timer.start()
         return timer
 
