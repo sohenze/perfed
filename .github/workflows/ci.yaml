@@ -1,9 +1,9 @@
-name: Check
+name: CI
 
 on:
   pull_request:
     paths:
-      - .github/workflows/check.yaml
+      - .github/workflows/ci.yaml
       - src/**
   push:
     branches:
@@ -11,7 +11,7 @@ on:
 
 
 jobs:
-  lint-and-check:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +30,6 @@ jobs:
 
       - name: Check
         run: uv run check
+
+      - name: Test
+        run: uv run test
