@@ -65,12 +65,28 @@ class TimerManager:
         timer.stop()
 
     def get_timer(self, name: str) -> Timer:
+        """Return a timer with the given name
+
+        Args:
+            name (str): Name of timer to return
+
+        Raises:
+            ValueError: Timer with the given name does not exist.
+
+        Returns:
+            Timer: Timer with the given name.
+        """
         if (timer := self._timers.get(name)) is None:
             raise ValueError(f"Timer with the name {name} does not exist.")
 
         return timer
 
     def get_timers(self) -> Dict[str, Timer]:
+        """Return a dictionary mapping timer name to timer.
+
+        Returns:
+            Dict[str, Timer]: Dictionary of timer names and timers.
+        """
         return self._timers
 
     def to_tuples(self, unit: Literal["ns", "ms", "sec", "min"] = "sec") -> List[Tuple[str, float]]:
