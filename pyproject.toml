@@ -19,11 +19,13 @@ Homepage = "https://github.com/sohenze/perfed"
 [project.scripts]
 lint = "scripts.lint:start"
 check = "scripts.check:start"
+test = "scripts.test:start"
 
 [dependency-groups]
 dev = [
     "ipykernel>=6.29.5",
     "pytest>=8.4.0",
+    "pytest-cov>=6.1.1",
     "ruff>=0.11.12",
     "ty>=0.0.1a8",
     "types-tabulate>=0.9.0.20241207",
