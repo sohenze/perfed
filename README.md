@@ -28,11 +28,17 @@ pip install perfed
 Measure and manage multiple timers concurrently.
 
 ```Python
+import logging
 import time
 
 from IPython.display import display as ipy_display
 
 from perfed.timer_manager import TimerManager
+
+
+logger = logging.getLogger("tm_logger")
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.FileHandler("tmp/timers.log"))
 
 tm = TimerManager()
 
@@ -59,7 +65,8 @@ print(tm.to_dict("ms"))
 print("~~~~~~~~~~DATAFRAME~~~~~~~~~~")
 ipy_display(tm.to_dataframe("ns"))
 
-tm.save("timers.csv", "csv")
+tm.save("tmp/timers.csv", "csv")
+tm.show(print_fn=logger.debug)
 ```
 
 Output:
@@ -67,22 +74,28 @@ Output:
 ~~~~~~~~~~TIMERS~~~~~~~~~~
 Timer      Duration
 -------  ----------
-first      0.200762
-second     0.300758
-third      0.40125
+first      0.200236
+second     0.300272
+third      0.400313
 ~~~~~~~~~~TUPLES~~~~~~~~~~
-[('first', 0.003346028333333333), ('second', 0.005012636666666666), ('third', 0.0066875016666666665)]
+[('first', 0.0033372583333333337), ('second', 0.005004535), ('third', 0.0066718866666666665)]
 ~~~~~~~~~~DICTIONARY~~~~~~~~~~
-{'first': 200761.7, 'second': 300758.2, 'third': 401250.1}
+{'first': 200235.5, 'second': 300272.1, 'third': 400313.2}
 ~~~~~~~~~~DATAFRAME~~~~~~~~~~
-    Timer	Duration
-0	first	200761700.0
-1	second	300758200.0
-2	third	401250100.0
-~~~~~~~~~~timers.csv~~~~~~~~~~
-first,0.2007617
-second,0.3007582
-third,0.4012501
+	Timer	 Duration
+0	first	 200235500.0
+1	second 300272100.0
+2	third	 400313200.0
+~~~~~~~~~~tmp/timers.csv~~~~~~~~~~
+first,0.2002355
+second,0.3002721
+third,0.4003132
+~~~~~~~~~~tmp/timers.log~~~~~~~~~~
+Timer      Duration
+-------  ----------
+first      0.200236
+second     0.300272
+third      0.400313
 ```
 
 ### Using **TimerDecorator**
